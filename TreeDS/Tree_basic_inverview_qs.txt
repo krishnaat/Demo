@@ -1,0 +1,105 @@
+Q1) Symmetric Tree :
+
+
+     1
+   /   \
+  2     2
+ / \   / \
+3   4 4   3
+
+
+bool isMirror(struct Node *root1, struct Node *root2) 
+{ 
+    //Base Condition
+    if (root1 == NULL && root2 == NULL) 
+        return true; 
+    if (root1 && root2 && root1->key == root2->key) 
+        return isMirror(root1->left, root2->right) && 
+               isMirror(root1->right, root2->left); 
+    return false; 
+} 
+
+
+
+Q2) Convert a given tree to its Sum Tree
+
+
+                  10
+               /      \
+             -2        6
+           /   \      /  \ 
+         8     -4    7    5
+
+
+                20(4-2+12+6)
+               /      \
+         4(8-4)      12(7+5)
+           /   \      /  \ 
+         0      0    0    0  
+int toSumTree(node *Node)  
+{  
+    // Base case  
+    if(Node == NULL)  
+    return 0;  
+  
+    // Store the old value  
+    int old_val = Node->data;  
+  
+    // Recursively call for left and 
+    // right subtrees and store the sum as  
+    // new value of this node  
+    Node->data = toSumTree(Node->left) + toSumTree(Node->right);  
+    return Node->data + old_val;  
+}  
+
+
+
+
+Q3) Write Code to Determine if Two Trees are Identical
+
+
+int identicalTrees(node* a, node* b)  
+{  
+    /*1. both empty */
+    if (a == NULL && b == NULL)  
+        return 1;  
+  
+    /* 2. both non-empty -> compare them */
+    if (a != NULL && b != NULL)  
+    {  
+        return
+        (  
+            a->data == b->data &&  
+            identicalTrees(a->left, b->left) &&  
+            identicalTrees(a->right, b->right)  
+        );  
+    }  
+      
+    /* 3. one empty, one not -> false */
+    return 0;  
+}  
+        
+Q4) Sum of all the parent nodes having child node x
+
+Input : Binary tree with x = 2:
+        4        
+       / \       
+      2   5      
+     / \ / \     
+    7  2 2  3    
+Output : 11
+
+        4        
+       / \       
+      2   5      
+     / \ / \     
+    7  2 2  3    
+
+The highlighted nodes (4, 2, 5) above
+are the nodes having 2 as a child node.
+
+
+
+Basic traversal while keeping track of the parent of the node. 
+
+
